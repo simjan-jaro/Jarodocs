@@ -1,14 +1,16 @@
 <?php
-$servername = "localhost";  // XAMPP kjører på localhost
-$username = "root";         // Standard MySQL-bruker
-$password = "";             // Standard MySQL-passord (tomt i XAMPP)
-$dbname = "jarodocs";       // Databasen du opprettet tidligere
+// Hent databaseinformasjon fra miljøvariabler
+$host = getenv('DB_HOST');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
+$database = getenv('DB_NAME');
 
-// Opprett tilkobling
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Opprett en ny databaseforbindelse
+$conn = new mysqli($host, $username, $password, $database);
 
-// Sjekk tilkobling
+// Sjekk om forbindelsen feilet
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Database connection failed: " . $conn->connect_error);
 }
 ?>
+
